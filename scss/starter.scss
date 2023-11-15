@@ -1,27 +1,16 @@
-// Override Bootstrap's Sass default variables
-//
-// Nearly all variables in Bootstrap are written with the `!default` flag.
-// This allows you to override the default values of those variables before
-// you import Bootstrap's source Sass files.
-//
-// Overriding the default variable values is the best way to customize your
-// CSS without writing _new_ styles. For example, change you can either change
-// `$body-color` or write more CSS that override's Bootstrap's CSS like so:
-// `body { color: red; }`.
+// Include parts of Bootstrap
 
-
-//
-// Bring in Bootstrap
-//
-
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
 @import "bootstrap/scss/functions"; // Required
-@import "bootstrap/scss/variables"; // Required
-@import "bootstrap/scss/mixins"; // Required
-@import "bootstrap/scss/utilities"; // Required
 
-// Place variable overrides first, then import just the styles you need. Note that some stylesheets are required no matter what.
-
+// 2. Include any default variable overrides here
 $font-size-root: 12px;
+
+// 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+
+// 4. Include any default map overrides here
 $h1-font-size: $font-size-base * 1.5;
 $h2-font-size: $font-size-base;
 $h3-font-size: $font-size-base;
@@ -29,13 +18,21 @@ $h4-font-size: $font-size-base;
 $h5-font-size: $font-size-base;
 $headings-font-weight: $font-weight-bold;
 
-@import "bootstrap/scss/root"; // Required
+// 5. Include remainder of required parts
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/root";
+
+// 6. Optionally include any other parts as needed
+@import "bootstrap/scss/utilities";
 @import "bootstrap/scss/reboot"; // Required
 @import "bootstrap/scss/type";
 @import "bootstrap/scss/images";
 @import "bootstrap/scss/containers";
 @import "bootstrap/scss/grid";
+@import "bootstrap/scss/helpers";
 @import "bootstrap/scss/tables";
+
 // @import "bootstrap/scss/forms";
 // @import "bootstrap/scss/buttons";
 // @import "bootstrap/scss/transitions";
@@ -60,15 +57,10 @@ $headings-font-weight: $font-weight-bold;
 // @import "bootstrap/scss/spinners";
 // @import "bootstrap/scss/offcanvas";
 
-@import "bootstrap/scss/helpers";
-
+// 7. Optionally include utilities API last to generate classes based on the Sass map in `_utilities.scss`
 @import "bootstrap/scss/utilities/api";
 
-
-//
-// Custom styles
-//
-
+// 8. Add additional custom code here
 .sds {
   @include make-container();
 
@@ -127,9 +119,9 @@ $headings-font-weight: $font-weight-bold;
     page-break-inside: avoid;
 
     > ol {
+      padding-inline-start: 0;
       list-style: none;
       counter-reset: sub-section;
-      padding-inline-start: 0;
 
       > li {
         display: block;

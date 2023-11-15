@@ -2,7 +2,7 @@
   "extends": [
     "stylelint-config-standard",
     "stylelint-config-standard-scss",
-    "stylelint-config-twbs-bootstrap/scss"
+    "stylelint-config-twbs-bootstrap"
   ],
   "rules": {
     "selector-max-compound-selectors": null,
